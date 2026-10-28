@@ -33,6 +33,9 @@ int main()
 
     std::cout << student.printStudentInfo() << std::endl;
 
+    student.setLname("");
+    std::cout << student.printStudentInfo() << std::endl;
+
     return 0;
 }
 
@@ -75,18 +78,26 @@ void StudentType::setGPA(double g)
 
 void StudentType::setFname(std::string newFname)
 {
-    if (newFname.empty())
+    if (newFname.empty() && fname.empty())
     {
         newFname = "Charlie";
+    }
+    else if (!fname.empty())
+    {
+        newFname = fname;
     }
     fname = newFname;
 }
 
 void StudentType::setLname(std::string newLname)
 {
-    if (newLname.empty())
+    if (newLname.empty() && lname.empty())
     {
         newLname = "Brown";
+    }
+    else if (!lname.empty())
+    {
+        newLname = lname;
     }
     lname = newLname;
 }
@@ -98,7 +109,15 @@ void StudentType::setEmail(std::string newEmail)
 
 std::string StudentType::printStudentInfo()
 {
-    std::string outStr;
-    outStr += fname + " " + lname + " -- GPA:" + std::to_string(gpa);
-    return outStr;
+    // StudentType othersTudent("","","", 4.0);
+    // othersTudent.fname;
+    /*  std::string outStr;
+     outStr += fname + " " + lname + " -- GPA:" + std::to_string(gpa);
+     return outStr;*/
+    std::ostringstream out;
+    out << std::setprecision(2) << std::fixed << std::showpoint;
+    out << fname << " " << lname << std::endl;
+    out << "Email Address: " << email << std::endl;
+    out << "GPA: " << gpa << std::endl;
+    return out.str();
 }
