@@ -33,6 +33,8 @@ int main()
 {
     StudentType student("Harry", "Potter", "hpotter@ivytech.edu", 3.0);
     std::cout << "Hello new student!" << std::endl;
+    Clock clocks[10];
+    // StudentType students[10];
 
     std::cout << student.printStudentInfo() << std::endl;
 
