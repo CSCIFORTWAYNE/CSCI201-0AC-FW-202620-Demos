@@ -8,7 +8,7 @@
 class Clock
 {
 public:
-    Clock(int hour = 0, int minute = 0, int second = 0);
+    Clock(int hour, int minute, int second);
     void setTime(int hour, int minute, int second);
     void getTime(int &hour, int &minute, int &second) const;
     std::string printTime() const;
