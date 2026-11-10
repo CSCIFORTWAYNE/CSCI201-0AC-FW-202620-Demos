@@ -6,6 +6,7 @@ Clock *makeClock();
 int inputHours();
 int inputMinutesOrSeconds(std::string part);
 void resetStream();
+void pointerParameters(int *&p, double *q);
 
 int main()
 {
@@ -58,53 +59,66 @@ int main()
     std::cout << c1.printTime() << std::endl;
     std::cout << c->printTime() << std::endl;
     Clock *c2 = nullptr;
-    c2 = makeClock();
-    c = makeClock();
-    std::cout << c2->printTime() << std::endl;
+    /* c2 = makeClock();
+    c = makeClock(); */
+    // std::cout << c2->printTime() << std::endl;
     std::cout << c->printTime() << std::endl;
+    c = nullptr;
     delete c;
     c = nullptr;
     delete c2;
     c2 = nullptr;
-    Clock **clocks;
-    int numClocks = 1;
-    clocks = new Clock *[numClocks];
-    int i = 0;
-    while (true)
-    {
-        clocks[i] = makeClock();
-        char more = 'Y';
-        std::cout << "Do you want to make another clock? ";
-        std::cin >> more;
-        more = toupper(more);
-        while (more != 'Y' && more != 'N')
+    /*     Clock **clocks;
+        int numClocks = 1;
+        clocks = new Clock *[numClocks];
+        int i = 0;
+        while (true)
         {
-            std::cout << "Please enter Y or N." << std::endl;
+            clocks[i] = makeClock();
+            char more = 'Y';
             std::cout << "Do you want to make another clock? ";
             std::cin >> more;
             more = toupper(more);
-        }
-        if (more == 'Y')
-        {
-            i++;
-            numClocks++;
-            Clock **temp = clocks;
-            clocks = new Clock *[numClocks];
-            for (int j = 0; j < i; j++)
+            while (more != 'Y' && more != 'N')
             {
-                clocks[j] = temp[j];
+                std::cout << "Please enter Y or N." << std::endl;
+                std::cout << "Do you want to make another clock? ";
+                std::cin >> more;
+                more = toupper(more);
             }
-            delete[] temp;
+            if (more == 'Y')
+            {
+                i++;
+                numClocks++;
+                Clock **temp = clocks;
+                clocks = new Clock *[numClocks];
+                for (int j = 0; j < i; j++)
+                {
+                    clocks[j] = temp[j];
+                }
+                delete[] temp;
+            }
+            else
+                break;
         }
-        else
-            break;
-    }
-    for (int i = 0; i < numClocks; i++)
-    {
-        std::cout << clocks[i]->printTime() << std::endl;
-        delete clocks[i];
-    }
-    delete[] clocks;
+        for (int i = 0; i < numClocks; i++)
+        {
+            std::cout << clocks[i]->printTime() << std::endl;
+            delete clocks[i];
+        }
+        delete[] clocks;
+     */
+    int *number = new int;
+    *number = 25;
+    double *secondNumber = new double;
+    *secondNumber = 40.3;
+    std::cout << number << " -- " << *number << std::endl;
+    std::cout << secondNumber << " -- " << *secondNumber << std::endl;
+    pointerParameters(number, secondNumber);
+    std::cout << number << " -- " << *number << std::endl;
+    std::cout << secondNumber << " -- " << *secondNumber << std::endl;
+    delete number;
+    delete secondNumber;
 }
 
 Clock *makeClock()
@@ -160,4 +174,14 @@ void resetStream()
 {
     std::cin.clear(); // unlocks the doors (clears the error flags from the stream)
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+void pointerParameters(int *&p, double *q)
+{
+    delete p;
+    p = new int;
+    *p = 37;
+    // q = new double;
+    *q = 12.5;
+    // delete q;
 }
