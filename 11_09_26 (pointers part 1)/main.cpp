@@ -44,7 +44,9 @@ int main()
 
     std::cout << &q << std::endl;
     std::cout << *p << std::endl;
-
+    delete[] p;
+    p = nullptr;
+    r = nullptr;
     Clock *c = nullptr;
     std::cout << c << std::endl;
     // c->incrementSeconds();
@@ -64,6 +66,45 @@ int main()
     c = nullptr;
     delete c2;
     c2 = nullptr;
+    Clock **clocks;
+    int numClocks = 1;
+    clocks = new Clock *[numClocks];
+    int i = 0;
+    while (true)
+    {
+        clocks[i] = makeClock();
+        char more = 'Y';
+        std::cout << "Do you want to make another clock? ";
+        std::cin >> more;
+        more = toupper(more);
+        while (more != 'Y' && more != 'N')
+        {
+            std::cout << "Please enter Y or N." << std::endl;
+            std::cout << "Do you want to make another clock? ";
+            std::cin >> more;
+            more = toupper(more);
+        }
+        if (more == 'Y')
+        {
+            i++;
+            numClocks++;
+            Clock **temp = clocks;
+            clocks = new Clock *[numClocks];
+            for (int j = 0; j < i; j++)
+            {
+                clocks[j] = temp[j];
+            }
+            delete[] temp;
+        }
+        else
+            break;
+    }
+    for (int i = 0; i < numClocks; i++)
+    {
+        std::cout << clocks[i]->printTime() << std::endl;
+        delete clocks[i];
+    }
+    delete[] clocks;
 }
 
 Clock *makeClock()
