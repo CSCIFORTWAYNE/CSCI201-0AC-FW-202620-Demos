@@ -9,9 +9,30 @@ bool isAorB(int num, int a, int b);
 bool isGTX(int num, int x, int = 0);
 bool isGTEQX(int num, int x, int = 0);
 
+class ptrMemberVarType
+{
+public:
+    ptrMemberVarType(int, int);
+    void deleteP();
+
+private:
+    int x;
+    int lenP;
+    int *p;
+};
+
 int main()
 {
     int newNum = inputInt("Enter a number greater than 0. ", "That is not a number greater than 0. Please try again.", isGTX, 0, 0);
+    ptrMemberVarType objectOne(newNum, 10);
+    {
+        ptrMemberVarType objectTwo(4, 15);
+        // objectOne.deleteP();
+        objectOne = objectTwo;
+        objectTwo.deleteP();
+    }
+    objectOne.deleteP();
+
     return 0;
 }
 
@@ -59,4 +80,16 @@ bool isGTX(int num, int x, int)
 bool isGTEQX(int num, int x, int)
 {
     return num >= x;
+}
+
+ptrMemberVarType::ptrMemberVarType(int x, int len)
+{
+    this->x = x;
+    lenP = len;
+    p = new int[lenP];
+}
+
+void ptrMemberVarType::deleteP()
+{
+    delete[] p;
 }
