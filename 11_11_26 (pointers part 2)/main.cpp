@@ -1,6 +1,6 @@
 #include <iostream>
-#include <limits>
 #include <string>
+#include <limits>
 
 void resetStream();
 int inputInt(std::string prompt, std::string error, bool (*valid)(int, int, int), int low, int high);
@@ -9,30 +9,23 @@ bool isAorB(int num, int a, int b);
 bool isGTX(int num, int x, int = 0);
 bool isGTEQX(int num, int x, int = 0);
 
-class ptrMemberVarType
-{
-public:
-    ptrMemberVarType(int, int);
-    ptrMemberVarType(const ptrMemberVarType &otherPtr);
-    ~ptrMemberVarType();
+/*
+Module 3 part b lab:
+put together input for 5 movies including their times in a txt file.
+submit the txt file to IvyLearn.
+movie title
+rating (string like R or PG-13)
+runtime (int in minutes)
+time, time, time, time
+movie title2
 
-private:
-    int x;
-    int lenP;
-    int *p;
-};
+
+
+time format hh:mm:ss AM or hh:mm:ss pm
+*/
 
 int main()
 {
-    int newNum = inputInt("Enter a number greater than 0. ", "That is not a number greater than 0. Please try again.", isGTX, 0, 0);
-    ptrMemberVarType objectOne(newNum, 10);
-    {
-        ptrMemberVarType objectTwo(4, 15);
-        // objectOne.deleteP();
-        // objectOne = objectTwo;
-    }
-    ptrMemberVarType objectThree(objectOne);
-
     return 0;
 }
 
@@ -80,24 +73,4 @@ bool isGTX(int num, int x, int)
 bool isGTEQX(int num, int x, int)
 {
     return num >= x;
-}
-
-ptrMemberVarType::ptrMemberVarType(int x, int len)
-{
-    this->x = x;
-    lenP = len;
-    p = new int[lenP];
-}
-
-ptrMemberVarType::ptrMemberVarType(const ptrMemberVarType &otherPtr)
-{
-    this->x = otherPtr.x;
-    this->lenP = otherPtr.lenP;
-    this->p = new int[lenP];
-}
-
-ptrMemberVarType::~ptrMemberVarType()
-{
-    delete[] p;
-    p = nullptr;
 }
