@@ -57,6 +57,26 @@ void TwelveHrClock::setHour(int hour)
     hr = hour;
 }
 
+TwelveHrClock::TwelveHrClock(int hour, int minute, int second, std::string partDay) : Clock(hour, minute, second)
+{
+    setHour(hour);
+    bool part = false;
+    std::transform(partDay.begin(), partDay.end(), partDay.begin(), ::toupper);
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (partDay == partToStr[i])
+        {
+            this->partOfDay = parts[i];
+            part = true;
+        }
+    }
+    if (!part)
+    {
+        this->partOfDay = partOfDayType::AM;
+    }
+}
+
 TwelveHrClock::partOfDayType TwelveHrClock::parts[2] = {partOfDayType::AM,
                                                         partOfDayType::PM};
 std::string TwelveHrClock::partToStr[2] = {"AM", "PM"};

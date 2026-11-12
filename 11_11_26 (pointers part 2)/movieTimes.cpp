@@ -69,6 +69,7 @@ void MovieTimes::clearTimes()
 
 MovieTimes::~MovieTimes()
 {
+    clearTimes();
 }
 
 void MovieTimes::copyMovie(const MovieTimes &movieToCopy)

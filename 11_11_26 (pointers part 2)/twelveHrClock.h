@@ -1,6 +1,7 @@
 #ifndef TWELVE_H
 #define TWELVE_H
 #include "clock.h"
+#include <algorithm>
 
 class TwelveHrClock : public Clock
 {
@@ -12,6 +13,7 @@ public:
     };
     std::string printTime() const;
     TwelveHrClock(int hour, int minute, int second, partOfDayType part);
+    TwelveHrClock(int hour, int minute, int second, std::string partDay);
     void setTime(int hour, int minute, int second, partOfDayType part);
     void incrementHour();
     void setHour(int hour);
