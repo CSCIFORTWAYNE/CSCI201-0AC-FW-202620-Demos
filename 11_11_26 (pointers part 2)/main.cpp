@@ -1,6 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <limits>
+#include "movieTimes.h"
+#include "twelveHrClock.h"
 
 void resetStream();
 int inputInt(std::string prompt, std::string error, bool (*valid)(int, int, int), int low, int high);
@@ -8,6 +11,7 @@ bool isIntInRange(int num, int low, int high);
 bool isAorB(int num, int a, int b);
 bool isGTX(int num, int x, int = 0);
 bool isGTEQX(int num, int x, int = 0);
+MovieTimes getMovieFromFile(std::ifstream &in);
 
 /*
 Module 3 part b lab:
