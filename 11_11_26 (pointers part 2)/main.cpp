@@ -13,7 +13,8 @@ class ptrMemberVarType
 {
 public:
     ptrMemberVarType(int, int);
-    void deleteP();
+    ptrMemberVarType(const ptrMemberVarType &otherPtr);
+    ~ptrMemberVarType();
 
 private:
     int x;
@@ -28,10 +29,9 @@ int main()
     {
         ptrMemberVarType objectTwo(4, 15);
         // objectOne.deleteP();
-        objectOne = objectTwo;
-        objectTwo.deleteP();
+        // objectOne = objectTwo;
     }
-    objectOne.deleteP();
+    ptrMemberVarType objectThree(objectOne);
 
     return 0;
 }
@@ -89,7 +89,15 @@ ptrMemberVarType::ptrMemberVarType(int x, int len)
     p = new int[lenP];
 }
 
-void ptrMemberVarType::deleteP()
+ptrMemberVarType::ptrMemberVarType(const ptrMemberVarType &otherPtr)
+{
+    this->x = otherPtr.x;
+    this->lenP = otherPtr.lenP;
+    this->p = new int[lenP];
+}
+
+ptrMemberVarType::~ptrMemberVarType()
 {
     delete[] p;
+    p = nullptr;
 }
