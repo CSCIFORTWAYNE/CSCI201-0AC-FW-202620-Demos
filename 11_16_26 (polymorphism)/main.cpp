@@ -2,6 +2,7 @@
 #include <random>
 #include "twelveHrClock.h"
 #include "clock.h"
+#include "twentyfourHrClock.h"
 
 // Module 4 part A lab -- tell me where you are with your project as of Monday 11/16
 
@@ -18,16 +19,18 @@ int main()
     Clock **clocks = new Clock *[10];
     for (int i = 0; i < 10; i++)
     {
-        // int clockType = distributionAPM(generator);
-        // if (clockType == 0)
-        // {
-        clocks[i] = new TwelveHrClock(distributionHour(generator), distributionMS(generator), distributionMS(generator), TwelveHrClock::parts[distributionAPM(generator)]);
-        //  }
-        //  else
-        //  {
-        //      clocks[i] = new Clock(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
-        //   }
+        int clockType = distributionAPM(generator);
+        if (clockType == 0)
+        {
+            clocks[i] = new TwelveHrClock(distributionHour(generator), distributionMS(generator), distributionMS(generator), TwelveHrClock::parts[distributionAPM(generator)]);
+        }
+        else
+        {
+            clocks[i] = new TwentyFourHrClock(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
+        }
     }
+    Clock *c = new TwelveHrClock(12, 12, 12, "AM");
+    delete c;
     displayClocks(clocks, 10);
     // setClock(*clocks[0]);
     for (int i = 0; i < 10; i++)
