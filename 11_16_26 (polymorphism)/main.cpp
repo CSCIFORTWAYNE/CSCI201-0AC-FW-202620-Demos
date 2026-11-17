@@ -3,6 +3,8 @@
 #include "twelveHrClock.h"
 #include "clock.h"
 
+// Module 4 part A lab -- tell me where you are with your project as of Monday 11/16
+
 void displayClocks(Clock **clocks, int numClocks);
 // void setClock(Clock c);
 int main()
