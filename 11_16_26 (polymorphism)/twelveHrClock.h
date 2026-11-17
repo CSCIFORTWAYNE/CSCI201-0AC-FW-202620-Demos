@@ -22,5 +22,13 @@ public:
 
 private:
     partOfDayType partOfDay;
+    int x;
+    int y;
+    int z;
+    int a;
+    int b;
+    int c;
+    int d;
+    std::string str;
 };
 #endif

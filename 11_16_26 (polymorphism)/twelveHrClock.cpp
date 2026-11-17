@@ -16,6 +16,14 @@ std::string TwelveHrClock::printTime() const
 TwelveHrClock::TwelveHrClock(int hour, int minute, int second, partOfDayType part) : Clock(hour, minute, second)
 {
     setTime(hour, minute, second, part);
+    x = 0;
+    y = 0;
+    z = 0;
+    a = 0;
+    b = 0;
+    c = 0;
+    d = 0;
+    str = "Hello World!!";
 }
 /* TwelveHrClock::TwelveHrClock() : Clock(0, 0, 0)
 {

@@ -21,6 +21,7 @@ public:
     void setMinute(int minute);
     void setSecond(int second);
     bool equalTime(const Clock &otherClock) const;
+    virtual ~Clock() {};
 
 protected:
     int hr;

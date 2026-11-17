@@ -8,8 +8,8 @@ DEPS := $(wildcard *.h)
 # Create the object targets
 OBJS := $(SRCS:%=%.o)
 
-CPPFLAGS :=  -pedantic-errors -fdiagnostics-color=always -g #-fsanitize=address 
-#LDFLAGS := -fsanitize=address
+CPPFLAGS :=  -pedantic-errors -fdiagnostics-color=always -g -fsanitize=address 
+LDFLAGS := -fsanitize=address
 
 # The final build step.
 $(TARGET_EXEC): $(OBJS)

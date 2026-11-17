@@ -4,6 +4,7 @@
 #include "clock.h"
 
 void displayClocks(Clock **clocks, int numClocks);
+void setClock(Clock c);
 int main()
 {
     std::random_device rd;
@@ -26,6 +27,12 @@ int main()
         }
     }
     displayClocks(clocks, 10);
+    setClock(*clocks[0]);
+    for (int i = 0; i < 10; i++)
+    {
+        delete clocks[i];
+    }
+    delete[] clocks;
 
     return 0;
 }
@@ -36,4 +43,10 @@ void displayClocks(Clock **clocks, int numClocks)
     {
         std::cout << clocks[i]->printTime() << std::endl;
     }
+}
+
+void setClock(Clock c) // causes slicing
+{
+    int x;
+    x = 0;
 }
