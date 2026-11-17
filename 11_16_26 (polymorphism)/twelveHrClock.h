@@ -15,8 +15,10 @@ public:
     TwelveHrClock(int hour, int minute, int second, partOfDayType part);
     TwelveHrClock(int hour, int minute, int second, std::string partDay);
     void setTime(int hour, int minute, int second, partOfDayType part);
-    void incrementHour();
+    // void setTime(int hour, int minute, int second);
+    void incrementHours();
     void setHour(int hour);
+    Clock *copyClock() const;
     static partOfDayType parts[2];
     static std::string partToStr[2];
 

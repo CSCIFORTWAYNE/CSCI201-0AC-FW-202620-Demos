@@ -1,9 +1,9 @@
 #include "clock.h"
 
-Clock::Clock(int hour, int minute, int second)
+/* Clock::Clock(int hour, int minute, int second)
 {
     setTime(hour, minute, second);
-}
+} */
 
 void Clock::setTime(int hour, int minute, int second)
 {
@@ -48,19 +48,19 @@ void Clock::incrementMinutes()
     }
 }
 
-void Clock::incrementHours()
+/* void Clock::incrementHours()
 {
     hr++ % 24;
-}
+} */
 
-void Clock::setHour(int hour)
+/* void Clock::setHour(int hour)
 {
     if (hour < 0 || hour > 23)
     {
         hour = abs(hour) % 24;
     }
     hr = hour;
-}
+} */
 
 void Clock::setMinute(int minute)
 {

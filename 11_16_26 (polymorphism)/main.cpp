@@ -4,7 +4,7 @@
 #include "clock.h"
 
 void displayClocks(Clock **clocks, int numClocks);
-void setClock(Clock c);
+// void setClock(Clock c);
 int main()
 {
     std::random_device rd;
@@ -16,18 +16,18 @@ int main()
     Clock **clocks = new Clock *[10];
     for (int i = 0; i < 10; i++)
     {
-        int clockType = distributionAPM(generator);
-        if (clockType == 0)
-        {
-            clocks[i] = new TwelveHrClock(distributionHour(generator), distributionMS(generator), distributionMS(generator), TwelveHrClock::parts[distributionAPM(generator)]);
-        }
-        else
-        {
-            clocks[i] = new Clock(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
-        }
+        // int clockType = distributionAPM(generator);
+        // if (clockType == 0)
+        // {
+        clocks[i] = new TwelveHrClock(distributionHour(generator), distributionMS(generator), distributionMS(generator), TwelveHrClock::parts[distributionAPM(generator)]);
+        //  }
+        //  else
+        //  {
+        //      clocks[i] = new Clock(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
+        //   }
     }
     displayClocks(clocks, 10);
-    setClock(*clocks[0]);
+    // setClock(*clocks[0]);
     for (int i = 0; i < 10; i++)
     {
         delete clocks[i];
@@ -45,8 +45,8 @@ void displayClocks(Clock **clocks, int numClocks)
     }
 }
 
-void setClock(Clock c) // causes slicing
+/* void setClock(Clock c) // causes slicing
 {
     int x;
     x = 0;
-}
+} */

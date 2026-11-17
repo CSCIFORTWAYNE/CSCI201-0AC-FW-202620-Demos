@@ -13,7 +13,7 @@ std::string TwelveHrClock::printTime() const
     return out;
 }
 
-TwelveHrClock::TwelveHrClock(int hour, int minute, int second, partOfDayType part) : Clock(hour, minute, second)
+TwelveHrClock::TwelveHrClock(int hour, int minute, int second, partOfDayType part)
 {
     setTime(hour, minute, second, part);
     x = 0;
@@ -36,7 +36,7 @@ void TwelveHrClock::setTime(int hour, int minute, int second, partOfDayType part
     partOfDay = part;
 }
 
-void TwelveHrClock::incrementHour()
+void TwelveHrClock::incrementHours()
 {
     hr++;
     if (hr == 12)
@@ -65,9 +65,9 @@ void TwelveHrClock::setHour(int hour)
     hr = hour;
 }
 
-TwelveHrClock::TwelveHrClock(int hour, int minute, int second, std::string partDay) : Clock(hour, minute, second)
+TwelveHrClock::TwelveHrClock(int hour, int minute, int second, std::string partDay)
 {
-    setHour(hour);
+    Clock::setTime(hour, minute, second);
     bool part = false;
     std::transform(partDay.begin(), partDay.end(), partDay.begin(), ::toupper);
 
@@ -84,6 +84,18 @@ TwelveHrClock::TwelveHrClock(int hour, int minute, int second, std::string partD
         this->partOfDay = partOfDayType::AM;
     }
 }
+
+Clock *TwelveHrClock::copyClock() const
+{
+    return new TwelveHrClock(*this);
+}
+
+/* void TwelveHrClock::setTime(int hour, int minute, int second)
+{
+    setHour(hour);
+    setMinute(minute);
+    setSecond(second);
+} */
 
 TwelveHrClock::partOfDayType TwelveHrClock::parts[2] = {partOfDayType::AM,
                                                         partOfDayType::PM};
