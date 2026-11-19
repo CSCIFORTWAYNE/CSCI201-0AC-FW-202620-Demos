@@ -105,24 +105,25 @@ bool TwelveHrClock::operator==(const TwelveHrClock &rightHandClock) const
 TwelveHrClock TwelveHrClock::operator+(const TwelveHrClock &rightHandClock) const
 {
     TwelveHrClock copy(*this);
-
-    copy.setHour(this->hr + rightHandClock.hr);
-    copy.setMinute(this->min + rightHandClock.min);
-    copy.setSecond(this->sec + rightHandClock.sec);
-    if (this->hr + rightHandClock.hr > 11)
+    for (int i = 0; i < rightHandClock.sec; i++)
     {
-        if (copy.partOfDay == partOfDayType::AM)
-        {
-            copy.partOfDay = partOfDayType::PM;
-        }
-        else
-        {
-            copy.partOfDay = partOfDayType::AM;
-        }
+        copy.incrementSeconds();
     }
+    for (int i = 0; i < rightHandClock.min; i++)
+    {
+        copy.incrementMinutes();
+    }
+    for (int i = 0; i < rightHandClock.hr; i++)
+    {
+        copy.incrementHours();
+    }
+
     return copy;
 }
-
+TwelveHrClock::partOfDayType TwelveHrClock::getPartOfDay() const
+{
+    return partOfDay;
+}
 TwelveHrClock::partOfDayType TwelveHrClock::parts[2] = {partOfDayType::AM,
                                                         partOfDayType::PM};
 std::string TwelveHrClock::partToStr[2] = {"AM", "PM"};

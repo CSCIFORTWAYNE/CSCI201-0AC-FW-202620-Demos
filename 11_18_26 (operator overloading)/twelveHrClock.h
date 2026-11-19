@@ -18,6 +18,7 @@ public:
     // void setTime(int hour, int minute, int second);
     void incrementHours();
     void setHour(int hour);
+    partOfDayType getPartOfDay() const;
     Clock *copyClock() const;
     bool operator==(const TwelveHrClock &rightHandClock) const; // leftHandClock == rightHandClock
     TwelveHrClock operator+(const TwelveHrClock &rightHandClock) const;

@@ -48,7 +48,25 @@ int main()
             c = c + clocks[i];
             std::cout << c.printTime() << std::endl;
         }
+        }
+    TwentyFourHrClock t1(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
+    TwentyFourHrClock t2(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
+    if (t1 == t2)
+    {
+        std::cout << "Found a match!" << std::endl;
+        std::cout << t1.printTime() << std::endl;
     }
+    if (t1 < c)
+    {
+        std::cout << "less than!";
+        std::cout << t1.printTime() << " " << c.printTime() << std::endl;
+    }
+    if (c > t1)
+    {
+        std::cout << "greater than!";
+        std::cout << t1.printTime() << " " << c.printTime() << std::endl;
+    }
+
     int x = 7;
     int y = 3;
     std::cout << x + y << std::endl;

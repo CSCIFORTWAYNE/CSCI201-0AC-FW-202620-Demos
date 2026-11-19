@@ -2,6 +2,7 @@
 #define TWENTYFOUR_H
 
 #include "clock.h"
+#include "twelveHrClock.h"
 class TwentyFourHrClock : public Clock
 {
 public:
@@ -9,7 +10,13 @@ public:
     void setHour(int hour);
     Clock *copyClock() const;
     TwentyFourHrClock(int hour, int minute, int second = 0);
-    friend bool operator==(const TwentyFourHrClock& leftHandClock, const TwentyFourHrClock& rightHandClock);
+    TwentyFourHrClock(const TwelveHrClock &);
+    friend bool operator==(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
+    friend bool operator!=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
+    friend bool operator<(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
+    friend bool operator>(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
+    friend bool operator<=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
+    friend bool operator>=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
 };
 
 #endif
