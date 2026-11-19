@@ -124,6 +124,38 @@ TwelveHrClock::partOfDayType TwelveHrClock::getPartOfDay() const
 {
     return partOfDay;
 }
+
+std::ostream &operator<<(std::ostream &out, const TwelveHrClock &clock)
+{
+    out << clock.printTime();
+    return out;
+}
+std::istream &operator>>(std::istream &in, TwelveHrClock &clock)
+{
+    // TODO: insert return statement here
+    int hour;
+    int minute;
+    int second;
+    std::string part;
+    in >> hour >> minute >> second;
+    in >> part;
+    TwelveHrClock c(hour, minute, second, part);
+    clock = c;
+    return in;
+}
 TwelveHrClock::partOfDayType TwelveHrClock::parts[2] = {partOfDayType::AM,
                                                         partOfDayType::PM};
 std::string TwelveHrClock::partToStr[2] = {"AM", "PM"};
+
+TwelveHrClock TwelveHrClock::operator++()
+{
+    incrementSeconds();
+    return *this;
+}
+
+TwelveHrClock TwelveHrClock::operator++(int)
+{
+    TwelveHrClock copy = *this;
+    incrementSeconds();
+    return copy;
+}

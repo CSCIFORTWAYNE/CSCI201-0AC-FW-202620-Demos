@@ -22,8 +22,12 @@ public:
     Clock *copyClock() const;
     bool operator==(const TwelveHrClock &rightHandClock) const; // leftHandClock == rightHandClock
     TwelveHrClock operator+(const TwelveHrClock &rightHandClock) const;
+    friend std::ostream &operator<<(std::ostream &out, const TwelveHrClock &clock);
+    friend std::istream &operator>>(std::istream &in, TwelveHrClock &clock);
     static partOfDayType parts[2];
     static std::string partToStr[2];
+    TwelveHrClock operator++();
+    TwelveHrClock operator++(int);
 
 private:
     partOfDayType partOfDay;

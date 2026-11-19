@@ -20,7 +20,9 @@ public:
     std::string getRating() const;
     void addTime(const Clock &timeAdd);
     void clearTimes();
+    const MovieTimes &operator=(const MovieTimes &movieToCopy);
     ~MovieTimes();
+    friend std::ostream &operator<<(std::ostream &, const MovieTimes &movie);
 
 private:
     std::string title;

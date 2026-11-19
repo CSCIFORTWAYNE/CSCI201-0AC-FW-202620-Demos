@@ -43,6 +43,16 @@ TwentyFourHrClock::TwentyFourHrClock(const TwelveHrClock &clockToConvert)
     sec = second;
 }
 
+TwentyFourHrClock TwentyFourHrClock::operator+(int minutesToAdd)
+{
+    TwentyFourHrClock copy = *this;
+    for (int i = 0; i < minutesToAdd; i++)
+    {
+        copy.incrementMinutes();
+    }
+    return copy;
+}
+
 bool operator==(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock)
 {
     return leftHandClock.hr == rightHandClock.hr && leftHandClock.min == rightHandClock.min && leftHandClock.sec == rightHandClock.sec;
@@ -105,4 +115,9 @@ bool operator<=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock 
 bool operator>=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock)
 {
     return leftHandClock > rightHandClock || leftHandClock == rightHandClock;
+}
+
+TwentyFourHrClock operator+(int minutesToAdd, TwentyFourHrClock c)
+{
+    return c + minutesToAdd;
 }

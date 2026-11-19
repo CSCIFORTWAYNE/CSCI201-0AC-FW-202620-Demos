@@ -41,38 +41,43 @@ int main()
         if (c == clocks[i])
         {
             std::cout << "Found a match!" << std::endl;
-            std::cout << clocks[i].printTime() << std::endl;
+            std::cout << clocks[i] << std::endl;
         }
         else
         {
             c = c + clocks[i];
-            std::cout << c.printTime() << std::endl;
+            std::cout << c << std::endl;
         }
-        }
+    }
+    c = clocks[0]++;
+    c = ++clocks[0];
     TwentyFourHrClock t1(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
     TwentyFourHrClock t2(distribution24Hour(generator), distributionMS(generator), distributionMS(generator));
     if (t1 == t2)
     {
         std::cout << "Found a match!" << std::endl;
-        std::cout << t1.printTime() << std::endl;
+        std::cout << t1 << std::endl;
     }
     if (t1 < c)
     {
         std::cout << "less than!";
-        std::cout << t1.printTime() << " " << c.printTime() << std::endl;
+        std::cout << t1 << " " << c << std::endl;
     }
-    if (c > t1)
+    if (t1 > c)
     {
         std::cout << "greater than!";
-        std::cout << t1.printTime() << " " << c.printTime() << std::endl;
+        std::cout << t1 << " " << c << std::endl;
     }
+    t2 = t1 + 10;
+    t2 = 20 + t1;
 
     int x = 7;
     int y = 3;
     std::cout << x + y << std::endl;
 
-    /* std::ifstream in("movies.txt");
+    std::ifstream in("movies.txt");
     MovieTimes **movies = new MovieTimes *[100];
+
     int numMovies = 0;
     while (!in.eof())
     {
@@ -81,9 +86,14 @@ int main()
     for (int i = 0; i < numMovies; i++)
     {
         std::cout << movies[i]->toString() << std::endl;
+        if (i + 1 < numMovies)
+        {
+            *movies[i] = *movies[i + 1];
+        }
+        std::cout << *movies[i] << std::endl;
         delete movies[i];
     }
-    delete[] movies; */
+    delete[] movies;
 
     return 0;
 }

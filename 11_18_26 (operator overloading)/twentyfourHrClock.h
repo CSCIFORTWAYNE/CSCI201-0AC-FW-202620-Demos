@@ -17,6 +17,8 @@ public:
     friend bool operator>(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
     friend bool operator<=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
     friend bool operator>=(const TwentyFourHrClock &leftHandClock, const TwentyFourHrClock &rightHandClock);
+    TwentyFourHrClock operator+(int minutesToAdd);
+    friend TwentyFourHrClock operator+(int minutesToAdd, TwentyFourHrClock c);
 };
 
 #endif

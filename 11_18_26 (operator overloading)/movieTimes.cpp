@@ -89,3 +89,18 @@ void MovieTimes::copyMovie(const MovieTimes &movieToCopy)
         showTimes[i] = movieToCopy.showTimes[i]->copyClock();
     }
 }
+
+const MovieTimes &MovieTimes::operator=(const MovieTimes &movieToCopy)
+{
+    if (this != &movieToCopy) // different addresses means no self copy
+    {
+        copyMovie(movieToCopy);
+    }
+    return *this;
+}
+
+std::ostream &operator<<(std::ostream &out, const MovieTimes &movie)
+{
+    out << movie.toString();
+    return out;
+}

@@ -85,3 +85,10 @@ bool Clock::equalTime(const Clock &otherClock) const
 
     return hr == otherClock.hr && min == otherClock.min && sec == otherClock.sec;
 }
+
+std::ostream &operator<<(std::ostream &out, const Clock &clockToPrint)
+{
+    out << clockToPrint.printTime();
+    return out;
+}
+

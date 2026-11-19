@@ -23,6 +23,7 @@ public:
     bool equalTime(const Clock &otherClock) const;
     virtual ~Clock() {};
     virtual Clock *copyClock() const = 0;
+    friend std::ostream &operator<<(std::ostream &out, const Clock &clockToPrint);
 
 protected:
     int hr;
