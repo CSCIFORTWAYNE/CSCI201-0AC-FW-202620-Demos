@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <map>
+#include "twentyfourHrClock.h"
 
 /* int max(int x, int y);
 double max(double x, double y);
@@ -8,13 +11,40 @@ float max(float x, float y); */
 template <class t>
 t max(t x, t y);
 
+// Module 5 part A lab
+// Add the numeric char (1-9) to hexValues.
+// use insert at least once and [] at least once
+
 int main()
 {
+    std::map<char, int> hexValues; // A = 10, a = 10
+    hexValues['A'] = 10;
+    hexValues['B'] = 11;
+    hexValues['C'] = 12;
+    hexValues['D'] = 13;
+    hexValues['E'] = 14;
+    hexValues['F'] = 15;
+    std::pair<std::map<char, int>::iterator, bool> p;
+    p = hexValues.insert(std::pair<char, int>('H', 11));
+    if (!p.second)
+    {
+        std::cout << "Unable to insert 'A' with a value of 11." << std::endl;
+        std::cout << hexValues['A'] << std::endl;
+    }
+
     int one = max(3, 4);
     long two = max(3L, 4L);
     short three = max(3, 4);
     float four = max(3.0f, 4.0f);
     double five = max(3.0, 4.0);
+    TwentyFourHrClock midnight(0, 0, 0);
+    std::vector<TwentyFourHrClock> clocks(100, midnight);
+    std::vector<TwentyFourHrClock>::iterator clockIt;
+    auto clockIt2 = clocks.begin();
+    for (clockIt = clocks.begin(); clockIt != clocks.end(); ++clockIt)
+    {
+        std::cout << *clockIt << std::endl;
+    }
 
     return 0;
 }
