@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include "twentyfourHrClock.h"
+#include "arrayList.h"
 
 /* int max(int x, int y);
 double max(double x, double y);
@@ -44,6 +45,22 @@ int main()
     for (clockIt = clocks.begin(); clockIt != clocks.end(); ++clockIt)
     {
         std::cout << *clockIt << std::endl;
+    }
+    ArrayListType<int> nums;
+    nums.insert(3);
+    nums.insert(7);
+    nums.insert(4);
+    nums.insert(2);
+    nums.insert(8);
+    for (int i = 0; i < nums.size(); i++)
+    {
+        std::cout << nums[i] << std::endl;
+    }
+    std::cout << std::endl;
+    nums.remove(4);
+    for (int i = 0; i < nums.size(); i++)
+    {
+        std::cout << nums[i] << std::endl;
     }
 
     return 0;

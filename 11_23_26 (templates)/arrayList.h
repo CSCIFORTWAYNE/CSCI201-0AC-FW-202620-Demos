@@ -26,6 +26,37 @@ protected:
 };
 
 template <class t>
+void ArrayListType<t>::insert(const t &insertItem)
+{
+    if (length == maxSize)
+        return;
+    list[length++] = insertItem;
+}
+
+template <class t>
+void ArrayListType<t>::remove(const t &removeItem)
+{
+    for (int i = 0; i < length; i++)
+    {
+        if (list[i] == removeItem)
+        {
+            for (int j = i + 1; j < length; j++)
+            {
+                list[i] = list[j];
+                i++;
+            }
+            length--;
+        }
+    }
+}
+
+template <class t>
+t &ArrayListType<t>::operator[](int index)
+{
+    return list[index];
+}
+
+template <class t>
 ArrayListType<t>::ArrayListType(int maxSize)
 {
     if (maxSize <= 0)
@@ -35,6 +66,12 @@ ArrayListType<t>::ArrayListType(int maxSize)
     this->maxSize = maxSize;
     this->length = 0;
     list = new t[this->maxSize];
+}
+
+template <class t>
+inline ArrayListType<t>::~ArrayListType()
+{
+    delete[] list;
 }
 
 template <class Type>
@@ -47,5 +84,10 @@ template <class t>
 bool ArrayListType<t>::isFull() const
 {
     return length == maxListSize;
+}
+template <class t>
+int ArrayListType<t>::size() const
+{
+    return length;
 }
 #endif
