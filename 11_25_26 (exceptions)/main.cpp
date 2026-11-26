@@ -5,6 +5,7 @@
 #include <random>
 #include "twentyfourHrClock.h"
 #include "twelveHrClock.h"
+#include "inputExcept.h"
 
 int inputInt(std::string prompt, std::string error, bool (*valid)(int, int, int), int low = 0, int high = 0);
 bool isIntInRange(int num, int low, int high);
@@ -77,11 +78,11 @@ int inputInt(std::string prompt, std::string error, bool (*valid)(int, int, int)
     std::cout << std::endl;
     if (!std::cin)
     {
-        throw 8;
+        throw Input_Exception();
     }
     if (!valid(num, low, high))
     {
-        throw 10;
+        throw Input_Exception(error, false);
     }
     return num;
 }
@@ -119,9 +120,14 @@ Clock *makeClock()
             {
                 hour = inputInt(hourPrompt, "The hour is invalid", validHourFunc, hourLow, hourHigh);
             }
-            catch (int e)
+            catch (Input_Exception e)
             {
-                resetStream();
+                std::cout << e.what() << std::endl;
+                if (e.hasStreamReset())
+                {
+                    resetStream();
+                    e.setStreamReset(false);
+                }
                 validHour = false;
                 continue;
             }
@@ -131,11 +137,16 @@ Clock *makeClock()
         {
             try
             {
-                minute = inputInt(minPrompt, "error", isIntInRange, 0, 59);
+                minute = inputInt(minPrompt, "Please enter a minute between 0 and 59", isIntInRange, 0, 59);
             }
-            catch (int e)
+            catch (Input_Exception e)
             {
-                resetStream();
+                std::cout << e.what() << std::endl;
+                if (e.hasStreamReset())
+                {
+                    resetStream();
+                    e.setStreamReset(false);
+                }
                 validMinute = false;
                 continue;
             }
@@ -145,20 +156,37 @@ Clock *makeClock()
         {
             try
             {
-                second = inputInt(secPrompt, "error", isIntInRange, 0, 59);
+                second = inputInt(secPrompt, "Please enter a second between 0 and 59", isIntInRange, 0, 59);
             }
-            catch (int e)
+            catch (Input_Exception e)
             {
-                resetStream();
+                std::cout << e.what() << std::endl;
+                if (e.hasStreamReset())
+                {
+                    resetStream();
+                    e.setStreamReset(false);
+                }
                 validSecond = false;
                 continue;
             }
             validSecond = true;
         }
+        TwelveHrClock::partOfDayType part;
         try
         {
-            clockptr = new TwentyFourHrClock(hour, minute, second);
-
+            if (type == 12)
+            {
+                if (!validAM)
+                {
+                    part = inputPartOfDay();
+                    validAM = true;
+                }
+                clockptr = new TwelveHrClock(hour, minute, second, part);
+            }
+            else
+            {
+                clockptr = new TwentyFourHrClock(hour, minute, second);
+            }
             retry = false;
         }
         catch (Invalid_Hour e)
