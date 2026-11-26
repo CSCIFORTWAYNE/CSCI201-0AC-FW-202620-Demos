@@ -66,7 +66,7 @@ void Clock::setMinute(int minute)
 {
     if (minute < 0 || minute > 59)
     {
-        throw std::invalid_argument("The minute (" + std::to_string(minute) + ") is invalid.");
+        throw Invalid_Minute(minute);
     }
     min = minute;
 }
@@ -75,7 +75,7 @@ void Clock::setSecond(int second)
 {
     if (second < 0 || second > 59)
     {
-        throw std::invalid_argument("The second (" + std::to_string(second) + ") is invalid.");
+        throw Invalid_Second(second);
     }
     sec = second;
 }

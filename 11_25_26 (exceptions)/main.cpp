@@ -71,7 +71,7 @@ bool isGTX(int num, int low, int high)
 
 int inputInt(std::string prompt, std::string error, bool (*valid)(int, int, int), int low, int high)
 {
-    int num;
+    int num = 100;
     std::cout << prompt;
     std::cin >> num;
     std::cout << std::endl;
@@ -99,13 +99,14 @@ Clock *makeClock()
     std::string hourPrompt = "Enter the clock's hour: ";
     std::string minPrompt = "Enter the clock's minutes: ";
     std::string secPrompt = "Enter the clock's seconds: ";
-    int hour;
-    int minute;
-    int second;
+    int hour = 100;
+    int minute = 100;
+    int second = 100;
     bool validHour = false;
     bool (*validHourFunc)(int, int, int) = isGTX;
     int hourLow = 0;
     int hourHigh = 0;
+
     bool validMinute = false;
     bool validSecond = false;
     bool validAM = false;
@@ -121,6 +122,8 @@ Clock *makeClock()
             catch (int e)
             {
                 resetStream();
+                validHour = false;
+                continue;
             }
             validHour = true;
         }
@@ -128,11 +131,13 @@ Clock *makeClock()
         {
             try
             {
-                minute = inputInt(minPrompt, "error", isGTX);
+                minute = inputInt(minPrompt, "error", isIntInRange, 0, 59);
             }
             catch (int e)
             {
                 resetStream();
+                validMinute = false;
+                continue;
             }
             validMinute = true;
         }
@@ -140,17 +145,20 @@ Clock *makeClock()
         {
             try
             {
-                second = inputInt(secPrompt, "error", isGTX);
+                second = inputInt(secPrompt, "error", isIntInRange, 0, 59);
             }
             catch (int e)
             {
                 resetStream();
+                validSecond = false;
+                continue;
             }
             validSecond = true;
         }
         try
         {
             clockptr = new TwentyFourHrClock(hour, minute, second);
+
             retry = false;
         }
         catch (Invalid_Hour e)
@@ -163,10 +171,14 @@ Clock *makeClock()
             }
             validHour = false;
         }
-        catch (std::invalid_argument e)
+        catch (Invalid_Minute e)
         {
             std::cout << e.what() << std::endl;
             validMinute = false;
+        }
+        catch (Invalid_Second e)
+        {
+            std::cout << e.what() << std::endl;
             validSecond = false;
         }
     }
