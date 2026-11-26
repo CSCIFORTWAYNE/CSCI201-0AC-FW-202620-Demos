@@ -2,6 +2,8 @@
 #include <vector>
 #include <stdexcept>
 #include <limits>
+#include <random>
+#include "twentyfourHrClock.h"
 
 int inputInt(std::string prompt, std::string error, bool (*valid)(int, int, int), int low = 0, int high = 0);
 bool isIntInRange(int num, int low, int high);
@@ -14,10 +16,15 @@ int main()
     std::vector<int> list;
     list.push_back(5);
     list[3] = 7;
+    std::random_device rd;
+    std::default_random_engine generator(rd());
+    std::uniform_int_distribution distribution(0, 100);
     try
     {
-        int x = inputInt("Enter a number: ", "error", isGTX);
+        int x = inputInt("Enter a number: ", "error", isGTX, -1);
         list.at(x) = 7;
+        TwentyFourHrClock newclock(distribution(generator), distribution(generator), distribution(generator));
+        std::cout << newclock << std::endl;
     }
     catch (std::out_of_range e)
     {
@@ -34,6 +41,10 @@ int main()
         {
             std::cout << "negative input detected" << std::endl;
         }
+    }
+    catch (std::invalid_argument e)
+    {
+        std::cout << e.what() << std::endl;
     }
     return 0;
 }
